@@ -12,6 +12,43 @@
         .back-btn { color: white; text-decoration: none; font-size: 1.2em; padding: 5px 10px; }
         h1 { margin: 0; font-size: 1.2em; flex-grow: 1; text-align: center; padding-right: 50px; }
         #map { height: 100vh; width: 100%; padding-top: 60px; box-sizing: border-box; }
+        
+        /* Стили для попапа */
+        .honey-popup {
+            text-align: center;
+            min-width: 200px;
+        }
+        .honey-popup h3 {
+            color: #8B5A2B;
+            margin: 0 0 10px 0;
+            font-size: 1.3em;
+        }
+        .honey-popup .honey-desc {
+            color: #4A3728;
+            margin: 10px 0;
+            font-size: 0.95em;
+        }
+        .honey-popup .honey-price {
+            color: #E6A419;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+        .seller-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #F5C542 0%, #E6A419 100%);
+            color: #4A3728;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            box-shadow: 0 2px 8px rgba(230, 164, 25, 0.4);
+            transition: transform 0.1s;
+        }
+        .seller-btn:active {
+            transform: scale(0.95);
+        }
     </style>
 </head>
 <body>
@@ -47,10 +84,16 @@
             iconAnchor: [22, 45]
         });
 
-        // Маркер с описанием
+        // Маркер с информацией о мёде и кнопкой карточки продавца
         L.marker(honeySpot, {icon: honeyIcon}).addTo(map)
-            .bindPopup('<b style="color:#8B5A2B;">Точка выдачи "ВКладовке"</b><br>Тюмень, ул. Стартовая, 7<br><i>Здесь вас ждёт самый вкусный мёд!</i>')
-            
+            .bindPopup(`
+                <div class="honey-popup">
+                    <h3>Мёд Липовый</h3>
+                    <p class="honey-desc">Светлый, ароматный, идеален для чая. Собран в экологически чистом районе Тюменской области.</p>
+                    <p class="honey-price">500 ₽ / 0.5л</p>
+                    <a href="seller.html" class="seller-btn">👤 Карточка продавца</a>
+                </div>
+            `);
     </script>
 </body>
 </html>
