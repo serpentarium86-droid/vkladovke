@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карта мёда - ВКладовке</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        body { font-family: sans-serif; margin: 0; padding: 0; background: #FFF8E7; }
+        .header { background: #8B5A2B; color: white; padding: 15px; text-align: center; display: flex; align-items: center; justify-content: space-between; position: fixed; top: 0; width: 100%; z-index: 1000; }
+        .back-btn { color: white; text-decoration: none; font-size: 1.2em; padding: 5px 10px; }
+        h1 { margin: 0; font-size: 1.2em; flex-grow: 1; text-align: center; padding-right: 50px; }
+        #map { height: 100vh; width: 100%; padding-top: 60px; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← Назад</a>
+        <h1>Навигатор мёда</h1>
+    </div>
+    <div id="map"></div>
+
+    <script>
+        // Точные координаты: Тюмень, ул. Стартовая, 7
+        var honeySpot = [57.1454, 65.6556];
+        
+        // Создаём карту
+        var map = L.map('map', {
+            zoomControl: false
+        }).setView(honeySpot, 16);
+        
+        L.control.zoom({
+            position: 'bottomright'
+        }).addTo(map);
+        
+        // Подключаем карты OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© ВКладовке | © OpenStreetMap'
+        }).addTo(map);
+
+        // Красивая иконка мёда
+        var honeyIcon = L.divIcon({
+            className: 'honey-marker',
+            html: '<div style="font-size: 45px; filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.4));">🍯</div>',
+            iconSize: [45, 45],
+            iconAnchor: [22, 45]
+        });
+
+        // Маркер с описанием
+        L.marker(honeySpot, {icon: honeyIcon}).addTo(map)
+            .bindPopup('<b style="color:#8B5A2B;">Точка выдачи "ВКладовке"</b><br>Тюмень, ул. Стартовая, 7<br><i>Здесь вас ждёт самый вкусный мёд!</i>')
+            .openPopup();
+    </script>
+</body>
+</html>
