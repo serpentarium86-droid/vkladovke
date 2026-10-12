@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Разместить мёд - ВКладовке</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: -apple-system, "Segoe UI", sans-serif; background: #FFF8E7; color: #4A3728; margin: 0; padding: 0; }
+        
+        .header { background: #8B5A2B; color: white; padding: 15px; display: flex; align-items: center; justify-content: space-between; position: fixed; top: 0; width: 100%; z-index: 1000; }
+        .back-btn { color: white; text-decoration: none; font-size: 1.2em; padding: 5px 10px; }
+        h1 { margin: 0; font-size: 1.2em; flex-grow: 1; text-align: center; padding-right: 50px; }
+        
+        .content { padding: 80px 20px 20px 20px; }
+        
+        .form-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .form-section h2 {
+            color: #8B5A2B;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #8B5A2B;
+            font-size: 0.95em;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #F5C542;
+            border-radius: 8px;
+            font-size: 1em;
+            background: #FFF8E7;
+            color: #4A3728;
+            font-family: inherit;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #E6A419;
+            background: white;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .volume-checkboxes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .volume-checkboxes label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: #FFF8E7;
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 2px solid #F5C542;
+            cursor: pointer;
+            font-weight: normal;
+        }
+        
+        .volume-checkboxes input[type="checkbox"] {
+            width: auto;
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+            color: white;
+            padding: 18px;
+            border-radius: 12px;
+            border: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+            margin-top: 20px;
+        }
+        
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .info-box {
+            background: #FFF8E7;
+            border-left: 4px solid #F5C542;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← Назад</a>
+        <h1>Разместить мёд</h1>
+    </div>
+    
+    <div class="content">
+        <div class="info-box">
+            Заполните форму ниже. После нажатия "Отправить" данные придут администратору, и он добавит ваш мёд на карту.
+        </div>
+        
+        <form id="honeyForm">
+            <!-- Информация о продавце -->
+            <div class="form-section">
+                <h2>👤 О продавце</h2>
+                
+                <div class="form-group">
+                    <label>Ваше имя</label>
+                    <input type="text" id="sellerName" placeholder="Например: Иван" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Телефон для связи</label>
+                    <input type="tel" id="sellerPhone" placeholder="+7 (___) ___-__-__" required>
+                </div>
+            </div>
+            
+            <!-- Информация о мёде -->
+            <div class="form-section">
+                <h2> О мёде</h2>
+                
+                <div class="form-group">
+                    <label>Название мёда</label>
+                    <input type="text" id="honeyName" placeholder="Например: Мёд Липовый" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Описание</label>
+                    <textarea id="honeyDesc" placeholder="Вкус, аромат, особенности..." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Цена (₽ за 0.5л)</label>
+                    <input type="number" id="honeyPrice" placeholder="500" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Доступные объёмы</label>
+                    <div class="volume-checkboxes">
+                        <label><input type="checkbox" value="0.5л"> 0.5л</label>
+                        <label><input type="checkbox" value="1л"> 1л</label>
+                        <label><input type="checkbox" value="3л"> 3л</label>
+                        <label><input type="checkbox" value="5л"> 5л</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Адрес -->
+            <div class="form-section">
+                <h2>📍 Адрес продажи</h2>
+                
+                <div class="form-group">
+                    <label>Город</label>
+                    <input type="text" id="city" placeholder="Тюмень" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Улица и дом</label>
+                    <input type="text" id="address" placeholder="ул. Казачьи Луга, 3" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Дополнительно (ТЦ, магазин, ориентир)</label>
+                    <input type="text" id="landmark" placeholder="ТЦ Галактика, 1 этаж">
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-btn">📤 Отправить заявку</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('honeyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Собираем данные
+            var sellerName = document.getElementById('sellerName').value;
+            var sellerPhone = document.getElementById('sellerPhone').value;
+            var honeyName = document.getElementById('honeyName').value;
+            var honeyDesc = document.getElementById('honeyDesc').value;
+            var honeyPrice = document.getElementById('honeyPrice').value;
+            var city = document.getElementById('city').value;
+            var address = document.getElementById('address').value;
+            var landmark = document.getElementById('landmark').value;
+            
+            // Собираем объёмы
+            var volumes = [];
+            document.querySelectorAll('.volume-checkboxes input[type="checkbox"]:checked').forEach(function(cb) {
+                volumes.push(cb.value);
+            });
+            
+            // Формируем сообщение
+            var message = '🍯 НОВАЯ ЗАЯВКА НА РАЗМЕЩЕНИЕ\n\n';
+            message += '👤 ПРОДАВЕЦ:\n';
+            message += 'Имя: ' + sellerName + '\n';
+            message += 'Телефон: ' + sellerPhone + '\n\n';
+            message += '🍯 МЁД:\n';
+            message += 'Название: ' + honeyName + '\n';
+            message += 'Описание: ' + honeyDesc + '\n';
+            message += 'Цена: ' + honeyPrice + ' ₽ / 0.5л\n';
+            message += 'Объёмы: ' + volumes.join(', ') + '\n\n';
+            message += '📍 АДРЕС:\n';
+            message += city + ', ' + address + '\n';
+            if (landmark) message += 'Ориентир: ' + landmark + '\n';
+            
+            // Кодируем для URL
+            var encodedMessage = encodeURIComponent(message);
+            
+            // Открываем Telegram
+            window.location.href = 'https://t.me/Spielberg777?text=' + encodedMessage;
+        });
+    </script>
+</body>
+</html>
