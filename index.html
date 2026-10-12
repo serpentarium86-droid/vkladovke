@@ -10,7 +10,6 @@
         h1 { color: #8B5A2B; text-align: center; margin-bottom: 5px; }
         .subtitle { text-align: center; color: #8B5A2B; margin-top: 0; margin-bottom: 40px; opacity: 0.8; }
         
-        /* Контейнер для кнопки-соты */
         .honey-nav-container {
             display: flex;
             justify-content: center;
@@ -18,20 +17,18 @@
             margin: 40px 0;
             position: relative;
             width: 100%;
-            height: 280px;
+            height: 290px;
         }
         
-        /* Шестиугольная сота */
         .honeycomb {
             width: 260px;
-            height: 240px;
+            height: 225px;
             background: linear-gradient(135deg, #F5C542 0%, #E6A419 100%);
             clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
             position: absolute;
             box-shadow: 0 8px 25px rgba(230, 164, 25, 0.4);
         }
         
-        /* Кнопка-радар */
         .navigator-btn {
             position: relative;
             width: 200px;
@@ -54,13 +51,11 @@
             transform: scale(0.95);
         }
         
-        /* Анимация радара */
         @keyframes radar-pulse {
             0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(0,0,0,0.3), inset 0 2px 10px rgba(255,255,255,0.3); }
             50% { transform: scale(1.02); box-shadow: 0 6px 25px rgba(230, 164, 25, 0.6), inset 0 2px 10px rgba(255,255,255,0.5); }
         }
         
-        /* Пульсирующие круги радара */
         .radar-ring {
             position: absolute;
             border: 3px solid rgba(255, 255, 255, 0.6);
