@@ -33,6 +33,11 @@
             font-size: 1.1em;
             margin: 10px 0;
         }
+        .honey-popup .honey-address {
+            font-size: 0.85em;
+            color: #888;
+            margin: 10px 0;
+        }
         .seller-btn {
             display: inline-block;
             background: linear-gradient(135deg, #F5C542 0%, #E6A419 100%);
@@ -61,13 +66,13 @@
         // Точка 1: ул. Стартовая, 7 (мкр. Тура)
         var spot1 = [57.1454, 65.6556];
         
-        // Точка 2: ТЦ Галактика, ул. Казачьи Луга (район Зарека)
-        var spot2 = [57.1380, 65.5390];
+        // Точка 2: ТЦ Галактика, ул. Казачьи Луга, 11
+        var spot2 = [57.1477, 65.6395];
         
         // Центрируем карту между двумя точками
         var map = L.map('map', {
             zoomControl: false
-        }).setView([57.1417, 65.5973], 12);
+        }).setView([57.1465, 65.6475], 14);
         
         L.control.zoom({
             position: 'bottomright'
@@ -92,7 +97,7 @@
                     <h3>Мёд Липовый</h3>
                     <p class="honey-desc">Светлый, ароматный, идеален для чая. Собран в экологически чистом районе Тюменской области.</p>
                     <p class="honey-price">500 ₽ / 0.5л</p>
-                    <p style="font-size:0.85em; color:#888;">📍 ул. Стартовая, 7 (мкр. Тура)</p>
+                    <p class="honey-address">📍 ул. Стартовая, 7 (мкр. Тура)</p>
                     <a href="seller.html" class="seller-btn">👤 Карточка продавца</a>
                 </div>
             `);
@@ -104,7 +109,7 @@
                     <h3>Мёд Разнотравье</h3>
                     <p class="honey-desc">Ароматный мёд из луговых цветов. Мягкий вкус, богат витаминами. Идеален для ежедневного употребления.</p>
                     <p class="honey-price">450 ₽ / 0.5л</p>
-                    <p style="font-size:0.85em; color:#888;">📍 ТЦ Галактика, ул. Казачьи Луга</p>
+                    <p class="honey-address"> ТЦ Галактика, ул. Казачьи Луга, 11</p>
                     <a href="seller.html" class="seller-btn">👤 Карточка продавца</a>
                 </div>
             `);

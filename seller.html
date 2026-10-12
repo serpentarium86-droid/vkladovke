@@ -14,7 +14,7 @@
         
         .content { padding: 80px 20px 20px 20px; }
         
-        .seller-info {
+        .seller-info, .honey-products {
             background: white;
             border-radius: 12px;
             padding: 20px;
@@ -22,7 +22,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
         
-        .seller-info h2 {
+        .seller-info h2, .honey-products h2 {
             color: #8B5A2B;
             margin-top: 0;
         }
@@ -30,19 +30,6 @@
         .seller-info p {
             margin: 10px 0;
             line-height: 1.6;
-        }
-        
-        .honey-products {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-        
-        .honey-products h2 {
-            color: #8B5A2B;
-            margin-top: 0;
         }
         
         .product-item {
@@ -70,6 +57,12 @@
             font-weight: bold;
             font-size: 1.1em;
             margin: 10px 0;
+        }
+        
+        .product-item .location {
+            color: #888;
+            font-size: 0.9em;
+            margin: 5px 0;
         }
         
         .volumes {
@@ -127,16 +120,14 @@
     </div>
     
     <div class="content">
-        <!-- Информация о продавце -->
         <div class="seller-info">
             <h2>👤 О продавце</h2>
             <p><strong>Имя:</strong> Рустам</p>
-            <p><strong>Местоположение:</strong> Тюмень, мкр. Тура (Лесобаза), ул. Стартовая, 7</p>
+            <p><strong>Местоположение:</strong> Тюмень</p>
             <p><strong>Опыт:</strong> Более 5 лет занимаюсь пчеловодством</p>
             <p><strong>Особенности:</strong> Натуральный мёд с собственной пасеки. Без добавок и сахара. Сбор в экологически чистых районах Тюменской области.</p>
         </div>
         
-        <!-- Список мёда -->
         <div class="honey-products">
             <h2>🍯 Доступный мёд</h2>
             
@@ -144,6 +135,7 @@
                 <h3>Мёд Липовый</h3>
                 <p class="description">Светлый, ароматный, идеален для чая. Обладает мягким вкусом и приятным цветочным ароматом.</p>
                 <p class="price">500 ₽ / 0.5л</p>
+                <p class="location">📍 ул. Стартовая, 7 (мкр. Тура)</p>
                 <div class="volumes">
                     <h4>Доступные объёмы:</h4>
                     <div class="volume-list">
@@ -158,6 +150,7 @@
                 <h3>Мёд Гречишный</h3>
                 <p class="description">Тёмный, терпкий, богат железом. Имеет насыщенный вкус с лёгкой горчинкой.</p>
                 <p class="price">600 ₽ / 0.5л</p>
+                <p class="location">📍 ул. Стартовая, 7 (мкр. Тура)</p>
                 <div class="volumes">
                     <h4>Доступные объёмы:</h4>
                     <div class="volume-list">
@@ -166,9 +159,23 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="product-item">
+                <h3>Мёд Разнотравье</h3>
+                <p class="description">Ароматный мёд из луговых цветов. Мягкий вкус, богат витаминами. Идеален для ежедневного употребления.</p>
+                <p class="price">450 ₽ / 0.5л</p>
+                <p class="location">📍 ТЦ Галактика, ул. Казачьи Луга, 11</p>
+                <div class="volumes">
+                    <h4>Доступные объёмы:</h4>
+                    <div class="volume-list">
+                        <span class="volume-tag">0.5л</span>
+                        <span class="volume-tag">1л</span>
+                        <span class="volume-tag">3л</span>
+                    </div>
+                </div>
+            </div>
         </div>
         
-        <!-- Кнопка связи -->
         <a href="https://t.me/Spielberg777?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D0%B7%D0%BD%D0%B0%D1%82%D1%8C%20%D0%BF%D0%BE%D0%B4%D1%80%D0%BE%D0%B1%D0%BD%D0%B5%D0%B5%20%D0%BE%20%D0%B2%D0%B0%D1%88%D0%B5%D0%BC%20%D0%BC%D1%91%D0%B4%D0%B5" class="contact-btn">
             💬 Связаться с продавцом
         </a>
