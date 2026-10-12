@@ -102,11 +102,27 @@
             text-align: center;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
-            margin-top: 20px;
+            margin-top: 10px;
         }
         
         .submit-btn:active {
             transform: scale(0.98);
+        }
+        
+        .save-draft-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            border: none;
+            font-weight: bold;
+            font-size: 1em;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+            margin-top: 10px;
         }
         
         .info-box {
@@ -118,6 +134,191 @@
             font-size: 0.9em;
             line-height: 1.5;
         }
+        
+        .warning-box {
+            background: #FFF3E0;
+            border-left: 4px solid #FF9800;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        
+        /* Стили для поиска адреса */
+        .address-search-row {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .address-search-row input {
+            flex: 1;
+        }
+        
+        .search-coords-btn {
+            background: #F5C542;
+            color: #4A3728;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .search-coords-btn:active {
+            background: #E6A419;
+        }
+        
+        .search-coords-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .coords-result {
+            margin-top: 10px;
+            padding: 10px;
+            background: #E8F5E9;
+            border-radius: 8px;
+            font-size: 0.9em;
+            display: none;
+        }
+        
+        .coords-result.error {
+            background: #FFEBEE;
+            color: #C62828;
+        }
+        
+        .coords-result.show {
+            display: block;
+        }
+        
+        /* Предпросмотр фото */
+        .photo-upload {
+            border: 2px dashed #F5C542;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            background: #FFF8E7;
+        }
+        
+        .photo-upload:active {
+            background: #FFF3E0;
+        }
+        
+        .photo-upload input[type="file"] {
+            display: none;
+        }
+        
+        .photo-preview {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 8px;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .photo-preview.show {
+            display: block;
+        }
+        
+        .photo-hint {
+            font-size: 0.85em;
+            color: #888;
+            margin-top: 8px;
+        }
+        
+        /* Черновики */
+        .drafts-section {
+            margin-top: 30px;
+        }
+        
+        .drafts-section h2 {
+            color: #8B5A2B;
+            margin-bottom: 15px;
+        }
+        
+        .draft-item {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .draft-info {
+            flex: 1;
+        }
+        
+        .draft-info strong {
+            color: #8B5A2B;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .draft-info small {
+            color: #888;
+        }
+        
+        .draft-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .draft-btn {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: none;
+            font-size: 0.85em;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .draft-btn.load {
+            background: #2196F3;
+            color: white;
+        }
+        
+        .draft-btn.delete {
+            background: #EF5350;
+            color: white;
+        }
+        
+        .no-drafts {
+            text-align: center;
+            color: #888;
+            padding: 20px;
+            font-style: italic;
+        }
+        
+        .status-msg {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 2000;
+        }
+        
+        .status-msg.show {
+            display: block;
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translate(-50%, 100px); opacity: 0; }
+            to { transform: translate(-50%, 0); opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -128,7 +329,7 @@
     
     <div class="content">
         <div class="info-box">
-            Заполните форму ниже. После нажатия "Отправить" данные придут администратору, и он добавит ваш мёд на карту.
+            Заполните форму. Данные <b>автоматически сохраняются</b> в черновики. После отправки администратор добавит ваш мёд на карту.
         </div>
         
         <form id="honeyForm">
@@ -149,7 +350,7 @@
             
             <!-- Информация о мёде -->
             <div class="form-section">
-                <h2> О мёде</h2>
+                <h2>🍯 О мёде</h2>
                 
                 <div class="form-group">
                     <label>Название мёда</label>
@@ -175,6 +376,17 @@
                         <label><input type="checkbox" value="5л"> 5л</label>
                     </div>
                 </div>
+                
+                <!-- Загрузка фото -->
+                <div class="form-group">
+                    <label>Фото мёда</label>
+                    <label class="photo-upload" for="honeyPhoto">
+                        <div>📷 Нажмите, чтобы выбрать фото</div>
+                        <input type="file" id="honeyPhoto" accept="image/*">
+                        <img id="photoPreview" class="photo-preview" alt="Предпросмотр">
+                    </label>
+                    <div class="photo-hint">️ Фото нужно будет прикрепить вручную в Telegram после отправки формы</div>
+                </div>
             </div>
             
             <!-- Адрес -->
@@ -188,24 +400,234 @@
                 
                 <div class="form-group">
                     <label>Улица и дом</label>
-                    <input type="text" id="address" placeholder="ул. Казачьи Луга, 3" required>
+                    <div class="address-search-row">
+                        <input type="text" id="address" placeholder="ул. Казачьи Луга, 3" required>
+                        <button type="button" class="search-coords-btn" id="searchCoords">🔍 Найти</button>
+                    </div>
                 </div>
                 
                 <div class="form-group">
                     <label>Дополнительно (ТЦ, магазин, ориентир)</label>
                     <input type="text" id="landmark" placeholder="ТЦ Галактика, 1 этаж">
                 </div>
+                
+                <div class="coords-result" id="coordsResult"></div>
             </div>
             
-            <button type="submit" class="submit-btn">📤 Отправить заявку</button>
+            <button type="submit" class="submit-btn"> Отправить заявку</button>
+            <button type="button" class="save-draft-btn" id="saveDraft">💾 Сохранить черновик</button>
         </form>
+        
+        <!-- Черновики -->
+        <div class="form-section drafts-section">
+            <h2> Мои черновики</h2>
+            <div id="draftsList"></div>
+        </div>
     </div>
+    
+    <div class="status-msg" id="statusMsg"></div>
 
     <script>
+        // ===== АВТОСОХРАНЕНИЕ =====
+        var formFields = ['sellerName', 'sellerPhone', 'honeyName', 'honeyDesc', 'honeyPrice', 'city', 'address', 'landmark'];
+        
+        // Загрузка данных из черновика при открытии
+        window.addEventListener('load', function() {
+            var saved = localStorage.getItem('honeyFormDraft');
+            if (saved) {
+                try {
+                    var data = JSON.parse(saved);
+                    formFields.forEach(function(id) {
+                        if (data[id]) document.getElementById(id).value = data[id];
+                    });
+                    // Восстановить чекбоксы объёмов
+                    if (data.volumes) {
+                        document.querySelectorAll('.volume-checkboxes input[type="checkbox"]').forEach(function(cb) {
+                            cb.checked = data.volumes.indexOf(cb.value) !== -1;
+                        });
+                    }
+                    showStatus('Черновик восстановлен');
+                } catch(e) {}
+            }
+            renderDrafts();
+        });
+        
+        // Автосохранение при каждом изменении
+        formFields.forEach(function(id) {
+            document.getElementById(id).addEventListener('input', autoSave);
+        });
+        document.querySelectorAll('.volume-checkboxes input').forEach(function(cb) {
+            cb.addEventListener('change', autoSave);
+        });
+        
+        function autoSave() {
+            var data = {};
+            formFields.forEach(function(id) {
+                data[id] = document.getElementById(id).value;
+            });
+            var volumes = [];
+            document.querySelectorAll('.volume-checkboxes input[type="checkbox"]:checked').forEach(function(cb) {
+                volumes.push(cb.value);
+            });
+            data.volumes = volumes;
+            data.savedAt = new Date().toISOString();
+            localStorage.setItem('honeyFormDraft', JSON.stringify(data));
+        }
+        
+        // Ручное сохранение черновика в список
+        document.getElementById('saveDraft').addEventListener('click', function() {
+            var data = {};
+            formFields.forEach(function(id) {
+                data[id] = document.getElementById(id).value;
+            });
+            var volumes = [];
+            document.querySelectorAll('.volume-checkboxes input[type="checkbox"]:checked').forEach(function(cb) {
+                volumes.push(cb.value);
+            });
+            data.volumes = volumes;
+            data.savedAt = new Date().toISOString();
+            data.id = Date.now();
+            
+            var drafts = JSON.parse(localStorage.getItem('honeyDrafts') || '[]');
+            drafts.unshift(data);
+            if (drafts.length > 10) drafts = drafts.slice(0, 10);
+            localStorage.setItem('honeyDrafts', JSON.stringify(drafts));
+            
+            renderDrafts();
+            showStatus('Черновик сохранён');
+        });
+        
+        function renderDrafts() {
+            var drafts = JSON.parse(localStorage.getItem('honeyDrafts') || '[]');
+            var container = document.getElementById('draftsList');
+            
+            if (drafts.length === 0) {
+                container.innerHTML = '<div class="no-drafts">Нет сохранённых черновиков</div>';
+                return;
+            }
+            
+            container.innerHTML = drafts.map(function(d) {
+                var date = new Date(d.savedAt).toLocaleString('ru-RU');
+                return '<div class="draft-item">' +
+                    '<div class="draft-info">' +
+                        '<strong>' + (d.honeyName || 'Без названия') + '</strong>' +
+                        '<small>' + date + '</small>' +
+                    '</div>' +
+                    '<div class="draft-actions">' +
+                        '<button class="draft-btn load" onclick="loadDraft(' + d.id + ')">Открыть</button>' +
+                        '<button class="draft-btn delete" onclick="deleteDraft(' + d.id + ')">Удалить</button>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+        }
+        
+        window.loadDraft = function(id) {
+            var drafts = JSON.parse(localStorage.getItem('honeyDrafts') || '[]');
+            var draft = drafts.find(function(d) { return d.id === id; });
+            if (!draft) return;
+            
+            formFields.forEach(function(fieldId) {
+                if (draft[fieldId]) document.getElementById(fieldId).value = draft[fieldId];
+            });
+            if (draft.volumes) {
+                document.querySelectorAll('.volume-checkboxes input[type="checkbox"]').forEach(function(cb) {
+                    cb.checked = draft.volumes.indexOf(cb.value) !== -1;
+                });
+            }
+            autoSave();
+            showStatus('Черновик загружен');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        };
+        
+        window.deleteDraft = function(id) {
+            if (!confirm('Удалить этот черновик?')) return;
+            var drafts = JSON.parse(localStorage.getItem('honeyDrafts') || '[]');
+            drafts = drafts.filter(function(d) { return d.id !== id; });
+            localStorage.setItem('honeyDrafts', JSON.stringify(drafts));
+            renderDrafts();
+            showStatus('Черновик удалён');
+        };
+        
+        // ===== ПОИСК КООРДИНАТ =====
+        var searchBtn = document.getElementById('searchCoords');
+        var coordsResult = document.getElementById('coordsResult');
+        var lastSearchTime = 0;
+        
+        searchBtn.addEventListener('click', function() {
+            var city = document.getElementById('city').value.trim();
+            var address = document.getElementById('address').value.trim();
+            
+            if (!city || !address) {
+                showCoordsResult('Заполните город и адрес', true);
+                return;
+            }
+            
+            // Ограничение 1 запрос в секунду
+            var now = Date.now();
+            if (now - lastSearchTime < 1100) {
+                showCoordsResult('Подождите секунду...', true);
+                return;
+            }
+            lastSearchTime = now;
+            
+            searchBtn.disabled = true;
+            searchBtn.textContent = '⏳ Поиск...';
+            showCoordsResult('Ищем адрес на карте...', false);
+            
+            var query = encodeURIComponent(city + ', ' + address);
+            var url = 'https://nominatim.openstreetmap.org/search?format=json&q=' + query + '&limit=1&addressdetails=1';
+            
+            fetch(url, {
+                headers: { 'Accept': 'application/json' }
+            })
+            .then(function(res) { return res.json(); })
+            .then(function(data) {
+                if (data && data.length > 0) {
+                    var lat = parseFloat(data[0].lat).toFixed(5);
+                    var lon = parseFloat(data[0].lon).toFixed(5);
+                    var displayName = data[0].display_name;
+                    showCoordsResult('✅ Найдено!<br>Широта: ' + lat + '<br>Долгота: ' + lon + '<br><small style="color:#666;">' + displayName + '</small>', false);
+                } else {
+                    showCoordsResult('❌ Адрес не найден. Проверьте написание.', true);
+                }
+            })
+            .catch(function(err) {
+                showCoordsResult('❌ Ошибка соединения. Проверьте интернет.', true);
+            })
+            .finally(function() {
+                searchBtn.disabled = false;
+                searchBtn.textContent = ' Найти';
+            });
+        });
+        
+        function showCoordsResult(html, isError) {
+            coordsResult.innerHTML = html;
+            coordsResult.className = 'coords-result show' + (isError ? ' error' : '');
+        }
+        
+        // ===== ПРЕДПРОСМОТР ФОТО =====
+        document.getElementById('honeyPhoto').addEventListener('change', function(e) {
+            var file = e.target.files[0];
+            if (!file) return;
+            
+            if (file.size > 5 * 1024 * 1024) {
+                alert('Фото слишком большое (макс. 5 МБ)');
+                return;
+            }
+            
+            var reader = new FileReader();
+            reader.onload = function(ev) {
+                var preview = document.getElementById('photoPreview');
+                preview.src = ev.target.result;
+                preview.classList.add('show');
+            };
+            reader.readAsDataURL(file);
+        });
+        
+        // ===== ОТПРАВКА =====
         document.getElementById('honeyForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Собираем данные
             var sellerName = document.getElementById('sellerName').value;
             var sellerPhone = document.getElementById('sellerPhone').value;
             var honeyName = document.getElementById('honeyName').value;
@@ -215,32 +637,36 @@
             var address = document.getElementById('address').value;
             var landmark = document.getElementById('landmark').value;
             
-            // Собираем объёмы
             var volumes = [];
             document.querySelectorAll('.volume-checkboxes input[type="checkbox"]:checked').forEach(function(cb) {
                 volumes.push(cb.value);
             });
             
-            // Формируем сообщение
-            var message = '🍯 НОВАЯ ЗАЯВКА НА РАЗМЕЩЕНИЕ\n\n';
-            message += '👤 ПРОДАВЕЦ:\n';
+            var message = ' НОВАЯ ЗАЯВКА НА РАЗМЕЩЕНИЕ\n\n';
+            message += ' ПРОДАВЕЦ:\n';
             message += 'Имя: ' + sellerName + '\n';
             message += 'Телефон: ' + sellerPhone + '\n\n';
-            message += '🍯 МЁД:\n';
+            message += ' МЁД:\n';
             message += 'Название: ' + honeyName + '\n';
             message += 'Описание: ' + honeyDesc + '\n';
             message += 'Цена: ' + honeyPrice + ' ₽ / 0.5л\n';
-            message += 'Объёмы: ' + volumes.join(', ') + '\n\n';
+            message += 'Объёмы: ' + (volumes.join(', ') || 'не указаны') + '\n\n';
             message += '📍 АДРЕС:\n';
             message += city + ', ' + address + '\n';
-            if (landmark) message += 'Ориентир: ' + landmark + '\n';
+            if (landmark) message += 'Ориентир: ' + landmark + '\n\n';
+            message += '📷 Фото: продавец прикрепит вручную';
             
-            // Кодируем для URL
             var encodedMessage = encodeURIComponent(message);
-            
-            // Открываем Telegram
             window.location.href = 'https://t.me/Spielberg777?text=' + encodedMessage;
         });
+        
+        // ===== УВЕДОМЛЕНИЯ =====
+        function showStatus(text) {
+            var el = document.getElementById('statusMsg');
+            el.textContent = text;
+            el.classList.add('show');
+            setTimeout(function() { el.classList.remove('show'); }, 2000);
+        }
     </script>
 </body>
 </html>
